@@ -13,6 +13,7 @@ import com.teamabnormals.endergetic.client.renderer.entity.layers.PurpoidEmissiv
 import com.teamabnormals.endergetic.client.renderer.entity.layers.PurpoidGelLayer;
 import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import com.teamabnormals.endergetic.core.other.EEPlayableEndimations;
 import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.ChatFormatting;
@@ -39,11 +40,11 @@ public class PurpoidRenderer extends MobRenderer<Purpoid, PurpoidModel> {
 	private final PurpoidModel[] models;
 
 	public PurpoidRenderer(EntityRendererProvider.Context context) {
-		super(context, new PurpoidModel(context.bakeLayer(PurpoidModel.LOCATION)), 0.6F);
+		super(context, new PurpoidModel(context.bakeLayer(EEModelLayers.PURPOID)), 0.6F);
 		this.models = new PurpoidModel[]{
 				this.getModel(),
-				new PurpModel(context.bakeLayer(PurpModel.LOCATION)),
-				new PurpModel(context.bakeLayer(PurpazoidModel.LOCATION))
+				new PurpModel(context.bakeLayer(EEModelLayers.PURP)),
+				new PurpModel(context.bakeLayer(EEModelLayers.PURPAZOID))
 		};
 		this.addLayer(new PurpoidEmissiveLayer(this));
 		PurpoidGelLayer gelLayer = new PurpoidGelLayer(this, context.getModelSet());

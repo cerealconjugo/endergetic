@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomKnotModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomKnot;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -17,7 +18,7 @@ public class BolloomKnotRenderer extends EntityRenderer<BolloomKnot> {
 
 	public BolloomKnotRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		this.model = new BolloomKnotModel<>(context.bakeLayer(BolloomKnotModel.LOCATION));
+		this.model = new BolloomKnotModel<>(context.bakeLayer(EEModelLayers.BOLLOOM_KNOT));
 	}
 
 	@Override

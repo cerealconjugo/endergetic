@@ -24,7 +24,7 @@ public class BoofBlockTileEntity extends BlockEntity {
 	public static void tick(Level level, BlockPos pos, BlockState state, BoofBlockTileEntity boofBlock) {
 		if (level.isClientSide || state.getValue(BoofBlock.BOOFED)) return;
 
-		if (!level.getEntitiesOfClass(Entity.class, new AABB(pos).inflate(0.05F), entity -> (!(entity instanceof Player) || !entity.isShiftKeyDown()) && !entity.getType().is(EEEntityTypeTags.BOOF_BLOCK_RESISTANT)).isEmpty()) {
+		if (!level.getEntitiesOfClass(Entity.class, new AABB(pos).inflate(0.05F), entity -> (!(entity instanceof Player) || !entity.isShiftKeyDown()) && !entity.isSpectator() && !entity.getType().is(EEEntityTypeTags.BOOF_BLOCK_RESISTANT)).isEmpty()) {
 			if (level.addFreshEntity(new BoofBlockEntity(level, pos))) {
 				level.setBlockAndUpdate(pos, EEBlocks.BOOF_BLOCK.get().defaultBlockState().setValue(BoofBlock.BOOFED, true));
 				level.playSound(null, pos, EESoundEvents.BOOF_BLOCK_INFLATE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);

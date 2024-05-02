@@ -9,8 +9,9 @@ import com.teamabnormals.endergetic.client.model.eetle.eggs.SmallEetleEggModel;
 import com.teamabnormals.endergetic.common.block.EetleEggBlock;
 import com.teamabnormals.endergetic.common.block.entity.EetleEggTileEntity;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import com.teamabnormals.endergetic.core.registry.EEBlocks;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import com.teamabnormals.endergetic.core.other.EERenderTypes;
+import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -34,9 +35,9 @@ public class EetleEggTileEntityRenderer implements BlockEntityRenderer<EetleEggT
 
 	public EetleEggTileEntityRenderer(BlockEntityRendererProvider.Context context) {
 		this.eggModels = new IEetleEggModel[]{
-				new SmallEetleEggModel(context.bakeLayer(SmallEetleEggModel.LOCATION)),
-				new MediumEetleEggModel(context.bakeLayer(MediumEetleEggModel.LOCATION)),
-				new LargeEetleEggModel(context.bakeLayer(LargeEetleEggModel.LOCATION))
+				new SmallEetleEggModel(context.bakeLayer(EEModelLayers.SMALL_EETLE_EGG)),
+				new MediumEetleEggModel(context.bakeLayer(EEModelLayers.MEDIUM_EETLE_EGG)),
+				new LargeEetleEggModel(context.bakeLayer(EEModelLayers.LARGE_EETLE_EGG))
 		};
 	}
 

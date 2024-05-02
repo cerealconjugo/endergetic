@@ -87,15 +87,6 @@ public class BoofBlock extends BaseEntityBlock {
 		}
 	}
 
-	public static void doBoof(Level world, BlockPos pos) {
-		if (!world.isClientSide) {
-			BoofBlockEntity boofBlock = new BoofBlockEntity(world, pos);
-			world.addFreshEntity(boofBlock);
-			world.playSound(null, pos, EESoundEvents.BOOF_BLOCK_INFLATE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
-		}
-		world.setBlockAndUpdate(pos, EEBlocks.BOOF_BLOCK.get().defaultBlockState().setValue(BOOFED, true));
-	}
-
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

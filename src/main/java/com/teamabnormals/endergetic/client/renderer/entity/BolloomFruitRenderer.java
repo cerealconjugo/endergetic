@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomFruitModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomFruit;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -19,7 +20,7 @@ public class BolloomFruitRenderer extends EntityRenderer<BolloomFruit> {
 
 	public BolloomFruitRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		this.model = new BolloomFruitModel<>(context.bakeLayer(BolloomFruitModel.LOCATION));
+		this.model = new BolloomFruitModel<>(context.bakeLayer(EEModelLayers.BOLLOOM_FRUIT));
 	}
 
 	@Override

@@ -56,10 +56,7 @@ import com.teamabnormals.endergetic.core.data.server.tags.EEBlockTagsProvider;
 import com.teamabnormals.endergetic.core.data.server.tags.EEEntityTypeTagsProvider;
 import com.teamabnormals.endergetic.core.data.server.tags.EEItemTagsProvider;
 import com.teamabnormals.endergetic.core.keybinds.KeybindHandler;
-import com.teamabnormals.endergetic.core.other.EEClientCompat;
-import com.teamabnormals.endergetic.core.other.EECompat;
-import com.teamabnormals.endergetic.core.other.EEDataProcessors;
-import com.teamabnormals.endergetic.core.other.EEDataSerializers;
+import com.teamabnormals.endergetic.core.other.*;
 import com.teamabnormals.endergetic.core.registry.*;
 import com.teamabnormals.endergetic.core.registry.EEStructureTypes.EEStructurePieceTypes;
 import com.teamabnormals.endergetic.core.registry.builtin.EEBiomes;
@@ -109,8 +106,8 @@ public class EndergeticExpansion {
 
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MOD_ID, "net"))
 			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
-			.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
-			.serverAcceptedVersions(NETWORK_PROTOCOL::equals)
+			.clientAcceptedVersions(NETWORK_PROTOCOL::equals).
+			serverAcceptedVersions(NETWORK_PROTOCOL::equals)
 			.simpleChannel();
 
 	public EndergeticExpansion() {
@@ -144,6 +141,7 @@ public class EndergeticExpansion {
 
 		bus.addListener(EventPriority.LOWEST, this::commonSetup);
 		bus.addListener(this::dataSetup);
+
 		context.registerConfig(ModConfig.Type.COMMON, EEConfig.COMMON_SPEC);
 	}
 
@@ -187,33 +185,33 @@ public class EndergeticExpansion {
 	}
 
 	private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(CorrockCrownStandingModel.LOCATION, CorrockCrownStandingModel::createLayerDefinition);
-		event.registerLayerDefinition(CorrockCrownWallModel.LOCATION, CorrockCrownWallModel::createLayerDefinition);
-		event.registerLayerDefinition(BolloomBudModel.LOCATION, BolloomBudModel::createLayerDefinition);
-		event.registerLayerDefinition(BoofBlockDispenserModel.LOCATION, BoofBlockDispenserModel::createLayerDefinition);
-		event.registerLayerDefinition(SmallEetleEggModel.LOCATION, SmallEetleEggModel::createLayerDefinition);
-		event.registerLayerDefinition(MediumEetleEggModel.LOCATION, MediumEetleEggModel::createLayerDefinition);
-		event.registerLayerDefinition(LargeEetleEggModel.LOCATION, LargeEetleEggModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.CORROCK_CROWN_STANDING, CorrockCrownStandingModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.CORROCK_CROWN_WALL, CorrockCrownWallModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOLLOOM_BUD, BolloomBudModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOOF_BLOCK_DISPENSED, BoofBlockDispenserModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.SMALL_EETLE_EGG, SmallEetleEggModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.MEDIUM_EETLE_EGG, MediumEetleEggModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.LARGE_EETLE_EGG, LargeEetleEggModel::createLayerDefinition);
 
-		event.registerLayerDefinition(BolloomFruitModel.LOCATION, BolloomFruitModel::createLayerDefinition);
-		event.registerLayerDefinition(PoiseClusterModel.LOCATION, PoiseClusterModel::createLayerDefinition);
-		event.registerLayerDefinition(BoofBlockModel.LOCATION, BoofBlockModel::createLayerDefinition);
-		event.registerLayerDefinition(BolloomKnotModel.LOCATION, BolloomKnotModel::createLayerDefinition);
-		event.registerLayerDefinition(BolloomBalloonModel.LOCATION, BolloomBalloonModel::createLayerDefinition);
-		event.registerLayerDefinition(PuffBugModel.LOCATION, PuffBugModel::createLayerDefinition);
-		event.registerLayerDefinition(BoofloBabyModel.LOCATION, BoofloBabyModel::createLayerDefinition);
-		event.registerLayerDefinition(AdolescentBoofloModel.LOCATION, AdolescentBoofloModel::createLayerDefinition);
-		event.registerLayerDefinition(BoofloModel.LOCATION, BoofloModel::createLayerDefinition);
-		event.registerLayerDefinition(LeetleModel.LOCATION, LeetleModel::createLayerDefinition);
-		event.registerLayerDefinition(ChargerEetleModel.LOCATION, ChargerEetleModel::createLayerDefinition);
-		event.registerLayerDefinition(GliderEetleModel.LOCATION, GliderEetleModel::createLayerDefinition);
-		event.registerLayerDefinition(BroodEetleModel.LOCATION, BroodEetleModel::createLayerDefinition);
-		event.registerLayerDefinition(PurpoidGelModel.PURPOID_LOCATION, PurpoidGelModel::createPurpoidLayerDefinition);
-		event.registerLayerDefinition(PurpoidGelModel.PURP_LOCATION, PurpoidGelModel::createPurpLayerDefinition);
-		event.registerLayerDefinition(PurpoidGelModel.PURPAZOID_LOCATION, PurpoidGelModel::createPurpazoidLayerDefinition);
-		event.registerLayerDefinition(PurpoidModel.LOCATION, PurpoidModel::createLayerDefinition);
-		event.registerLayerDefinition(PurpModel.LOCATION, PurpModel::createLayerDefinition);
-		event.registerLayerDefinition(PurpazoidModel.LOCATION, PurpazoidModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOLLOOM_FRUIT, BolloomFruitModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.POISE_CLUSTER, PoiseClusterModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOOF_BLOCK, BoofBlockModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOLLOOM_KNOT, BolloomKnotModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOLLOOM_BALLOON, BolloomBalloonModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PUFF_BUG, PuffBugModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOOFLO_BABY, BoofloBabyModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.ADOLESCENT_BOOFLO, AdolescentBoofloModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BOOFLO, BoofloModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.LEETLE, LeetleModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.CHARGER_EETLE, ChargerEetleModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.GLIDER_EETLE, GliderEetleModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.BROOD_EETLE, BroodEetleModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PURPOID_GEL, PurpoidGelModel::createPurpoidLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PURP_GEL, PurpoidGelModel::createPurpLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PURPAZOID_GEL, PurpoidGelModel::createPurpazoidLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PURPOID, PurpoidModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PURP, PurpModel::createLayerDefinition);
+		event.registerLayerDefinition(EEModelLayers.PURPAZOID, PurpazoidModel::createLayerDefinition);
 	}
 
 	private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

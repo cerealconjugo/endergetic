@@ -17,7 +17,6 @@ import net.minecraft.resources.ResourceLocation;
  * Created using Tabula 7.0.0
  */
 public class BoofBlockDispenserModel {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "boof_block_dispensed"), "main");
 	public ModelPart base;
 
 	public BoofBlockDispenserModel(ModelPart root) {

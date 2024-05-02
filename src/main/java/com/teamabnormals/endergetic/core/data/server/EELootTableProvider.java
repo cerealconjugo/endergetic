@@ -85,7 +85,7 @@ public class EELootTableProvider extends LootTableProvider {
 			this.dropSelf(BOLLOOM_CRATE.get());
 			this.dropSelf(BOOF_BLOCK.get());
 
-			this.add(POISE_CLUSTER.get(), BlockLootSubProvider::createShearsOnlyDrop);
+			this.dropSelf(POISE_CLUSTER.get());
 			this.add(POISE_BUSH.get(), BlockLootSubProvider::createShearsOnlyDrop);
 			this.add(TALL_POISE_BUSH.get(), this::createTallPoiseBushDrops);
 			this.add(POISMOSS.get(), block -> this.createSingleItemTableWithSilkTouch(block, Blocks.END_STONE));

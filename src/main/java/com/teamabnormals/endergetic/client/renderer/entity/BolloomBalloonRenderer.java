@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomBalloonModel;
 import com.teamabnormals.endergetic.common.entity.bolloom.BolloomBalloon;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -22,7 +23,7 @@ public final class BolloomBalloonRenderer extends EntityRenderer<BolloomBalloon>
 
 	public BolloomBalloonRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		this.model = new BolloomBalloonModel<>(context.bakeLayer(BolloomBalloonModel.LOCATION));
+		this.model = new BolloomBalloonModel<>(context.bakeLayer(EEModelLayers.BOLLOOM_BALLOON));
 	}
 
 	@Override

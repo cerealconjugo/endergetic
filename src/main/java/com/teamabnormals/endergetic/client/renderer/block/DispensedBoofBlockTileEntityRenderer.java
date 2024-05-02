@@ -7,6 +7,7 @@ import com.teamabnormals.endergetic.client.model.BoofBlockDispenserModel;
 import com.teamabnormals.endergetic.common.block.entity.boof.DispensedBlockBoofTileEntity;
 import com.teamabnormals.endergetic.common.block.poise.boof.DispensedBoofBlock;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -19,7 +20,7 @@ public class DispensedBoofBlockTileEntityRenderer implements BlockEntityRenderer
 	private final BoofBlockDispenserModel model;
 
 	public DispensedBoofBlockTileEntityRenderer(BlockEntityRendererProvider.Context context) {
-		this.model = new BoofBlockDispenserModel(context.bakeLayer(BoofBlockDispenserModel.LOCATION));
+		this.model = new BoofBlockDispenserModel(context.bakeLayer(EEModelLayers.BOOF_BLOCK_DISPENSED));
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class DispensedBoofBlockTileEntityRenderer implements BlockEntityRenderer
 		if (facing.getAxis().isVertical()) {
 			float offset = -facing.getAxisDirection().getStep();
 			matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F * offset));
-			matrixStack.translate(0.0F, 1.125F, 1.0F * offset);
+			matrixStack.translate(0.0F, 1.125F, offset);
 		} else {
 			matrixStack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
 		}

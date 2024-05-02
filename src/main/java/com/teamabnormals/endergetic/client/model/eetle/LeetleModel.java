@@ -23,7 +23,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class LeetleModel<E extends AbstractEetle> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "leetle"), "main");
 	public ModelPart body;
 	public ModelPart head;
 	public ModelPart body2;

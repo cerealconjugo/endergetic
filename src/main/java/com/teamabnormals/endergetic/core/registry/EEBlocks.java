@@ -127,7 +127,6 @@ public final class EEBlocks {
 	public static final RegistryObject<BlueprintTrappedChestBlock> TRAPPED_POISE_CHEST = HELPER.createTrappedChestBlockNamed("poise", EEProperties.POISE.chest());
 
 	public static final RegistryObject<Block> BOLLOOM_BUD = HELPER.createBlockWithBEWLR("bolloom_bud", () -> new BolloomBudBlock(EEProperties.bolloomBud().randomTicks()), () -> () -> new BEWLRBlockItem.LazyBEWLR(bolloomBudISTER()));
-	public static final RegistryObject<Block> BOLLOOM_PARTICLE = HELPER.createBlockNoItem("bolloom_particle", () -> new Block(EEProperties.bolloomBud().noCollission().noLootTable()));
 	public static final RegistryObject<Block> PUFFBUG_HIVE = HELPER.createBlock("puffbug_hive", () -> new PuffBugHiveBlock(EEProperties.getPuffBugHive(true)));
 	public static final RegistryObject<Block> HIVE_HANGER = HELPER.createBlockNoItem("hive_hanger", () -> new PuffbugHiveHangerBlock(EEProperties.getPuffBugHive(false)));
 	public static final RegistryObject<Block> BOOF_BLOCK = HELPER.createBlock("boof_block", () -> new BoofBlock(EEProperties.BOOF_BLOCK));

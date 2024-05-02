@@ -10,18 +10,12 @@ import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.endergetic.api.util.ModelUtil;
 import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
 import com.teamabnormals.endergetic.common.entity.purpoid.PurpoidSize;
-import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class PurpoidGelModel extends EndimatorEntityModel<Purpoid> {
-	public static final ModelLayerLocation PURPOID_LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "purpoid_gel"), "main");
-	public static final ModelLayerLocation PURP_LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "purp_gel"), "main");
-	public static final ModelLayerLocation PURPAZOID_LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "purpazoid_gel"), "main");
 	public ModelPart gelLayer;
 	private float headScale;
 

@@ -23,8 +23,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class ChargerEetleModel extends EndimatorEntityModel<ChargerEetle> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "charger_eetle"), "main");
-
 	public ModelPart body;
 	public ModelPart frontLeftLeg;
 	public ModelPart frontRightLeg;

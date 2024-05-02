@@ -25,7 +25,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class BroodEetleModel extends EndimatorEntityModel<BroodEetle> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "brood_eetle"), "main");
 	private static final float WING_SHOW_THRESHOLD = (float) Math.toRadians(15.0F);
 	public EndimatorModelPart body;
 	public EndimatorModelPart leftShell;

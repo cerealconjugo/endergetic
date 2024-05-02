@@ -8,6 +8,7 @@ import com.teamabnormals.endergetic.client.renderer.entity.layers.LayerRendererB
 import com.teamabnormals.endergetic.client.renderer.entity.layers.LayerRendererBoofloFruit;
 import com.teamabnormals.endergetic.common.entity.booflo.Booflo;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -25,7 +26,7 @@ public class BoofloRenderer extends MobRenderer<Booflo, EntityModel<Booflo>> {
 	});
 
 	public BoofloRenderer(EntityRendererProvider.Context context) {
-		super(context, new BoofloModel<>(context.bakeLayer(BoofloModel.LOCATION)), 1.25F);
+		super(context, new BoofloModel<>(context.bakeLayer(EEModelLayers.BOOFLO)), 1.25F);
 		this.addLayer(new BoofloEmissiveLayer<>(this));
 		this.addLayer(new LayerRendererBoofloBracelets<>(this));
 		this.addLayer(new LayerRendererBoofloFruit(this, context.getItemInHandRenderer()));

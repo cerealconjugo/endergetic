@@ -4,6 +4,7 @@ import com.teamabnormals.endergetic.api.entity.util.EntityItemStackHelper;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
 import com.teamabnormals.endergetic.core.interfaces.BalloonHolder;
 import com.teamabnormals.endergetic.core.interfaces.CustomBalloonPositioner;
+import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import com.teamabnormals.endergetic.core.registry.EEEntityTypes;
 import com.teamabnormals.endergetic.core.other.EEDataSerializers;
 import net.minecraft.core.BlockPos;
@@ -19,10 +20,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -252,8 +255,7 @@ public class BolloomBalloon extends AbstractBolloom {
 	public void onBroken(boolean dropFruit) {
 		super.onBroken(dropFruit);
 		Entity knot = this.getKnot();
-		if (knot instanceof BolloomKnot) {
-			BolloomKnot bolloomKnot = (BolloomKnot) knot;
+		if (knot instanceof BolloomKnot bolloomKnot) {
 			bolloomKnot.setBalloonsTied(bolloomKnot.getBalloonsTied() - 1);
 		}
 	}
@@ -275,12 +277,16 @@ public class BolloomBalloon extends AbstractBolloom {
 	public void kill() {
 		if (!this.level().isClientSide) {
 			Entity knot = this.getKnot();
-			if (knot instanceof BolloomKnot) {
-				BolloomKnot bolloomKnot = (BolloomKnot) knot;
+			if (knot instanceof BolloomKnot bolloomKnot) {
 				bolloomKnot.setBalloonsTied(bolloomKnot.getBalloonsTied() - 1);
 			}
 		}
 		super.kill();
+	}
+
+	@Override
+	public Block getBlockForParticle() {
+		return this.getColor() == BalloonColor.DEFAULT ? super.getBlockForParticle() : (Block) Sheep.ITEM_BY_DYE.get(this.getColor().color);
 	}
 
 	@Override

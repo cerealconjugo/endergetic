@@ -5,6 +5,7 @@ import com.teamabnormals.endergetic.client.model.eetle.LeetleModel;
 import com.teamabnormals.endergetic.client.renderer.entity.layers.EetleEmissiveLayer;
 import com.teamabnormals.endergetic.common.entity.eetle.AbstractEetle;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -22,7 +23,7 @@ public abstract class AbstractEetleRenderer<E extends AbstractEetle> extends Mob
 	public AbstractEetleRenderer(EntityRendererProvider.Context context, EntityModel<E> adultModel, ResourceLocation emissiveAdultTexture, float adultShadowSize) {
 		super(context, adultModel, adultShadowSize);
 		this.addLayer(new EetleEmissiveLayer<>(this, emissiveAdultTexture));
-		this.leetleModel = new LeetleModel<>(context.bakeLayer(LeetleModel.LOCATION));
+		this.leetleModel = new LeetleModel<>(context.bakeLayer(EEModelLayers.LEETLE));
 		this.adultModel = adultModel;
 		this.adultShadowSize = adultShadowSize;
 	}

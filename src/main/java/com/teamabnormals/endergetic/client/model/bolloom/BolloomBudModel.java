@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
  * Created using Tabula 7.0.0
  */
 public class BolloomBudModel {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "bolloom_bud"), "main");
 	public ModelPart Center;
 	public ModelPart Pedal;
 	public ModelPart Pedal_1;

@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.client.BlueprintRenderTypes;
 import com.teamabnormals.endergetic.client.model.purpoid.PurpoidGelModel;
 import com.teamabnormals.endergetic.client.model.purpoid.PurpoidModel;
 import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,9 +20,9 @@ public class PurpoidGelLayer extends RenderLayer<Purpoid, PurpoidModel> {
 	public PurpoidGelLayer(RenderLayerParent<Purpoid, PurpoidModel> parent, EntityModelSet entityModelSet) {
 		super(parent);
 		this.gelModels = new PurpoidGelModel[]{
-				new PurpoidGelModel(entityModelSet.bakeLayer(PurpoidGelModel.PURPOID_LOCATION)),
-				new PurpoidGelModel(entityModelSet.bakeLayer(PurpoidGelModel.PURP_LOCATION)),
-				new PurpoidGelModel(entityModelSet.bakeLayer(PurpoidGelModel.PURPAZOID_LOCATION))
+				new PurpoidGelModel(entityModelSet.bakeLayer(EEModelLayers.PURPOID_GEL)),
+				new PurpoidGelModel(entityModelSet.bakeLayer(EEModelLayers.PURP_GEL)),
+				new PurpoidGelModel(entityModelSet.bakeLayer(EEModelLayers.PURPAZOID_GEL))
 		};
 	}
 

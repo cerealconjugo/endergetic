@@ -26,7 +26,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class PurpoidModel extends EndimatorEntityModel<Purpoid> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "purpoid"), "main");
 	private static final ResourceLocation REST_ONTO_FLOWER_ENDIMATION = new ResourceLocation(EndergeticExpansion.MOD_ID, "purpoid/rest_onto_flower");
 	public ModelPart head;
 	public ModelPart rim1;

@@ -67,12 +67,15 @@ public class PoiseClusterBlock extends Block {
 
 						NetworkUtil.spawnParticle("endergetic:short_poise_bubble", x, y, z, GlowingPoiseStemBlock.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.025F, (rand.nextFloat() * 0.15F) + 0.1F, GlowingPoiseStemBlock.makeNegativeRandomly((rand.nextFloat() * 0.1F), rand) + 0.025F);
 					}
+					world.removeBlock(pos, false);
+					world.playSound(null, pos, EESoundEvents.CLUSTER_BREAK.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
-				world.removeBlock(pos, false);
 			}
 		} else {
-			world.destroyBlock(pos, false);
-			stack.hurtAndBreak(1, player, (broken) -> broken.broadcastBreakEvent(player.getUsedItemHand()));
+			if (!world.isClientSide()) {
+				world.destroyBlock(pos, false);
+				stack.hurtAndBreak(1, player, (broken) -> broken.broadcastBreakEvent(player.getUsedItemHand()));
+			}
 			popResource(world, pos, new ItemStack(this.asItem()));
 		}
 	}

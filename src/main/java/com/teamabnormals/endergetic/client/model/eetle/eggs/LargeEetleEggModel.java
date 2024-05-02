@@ -22,7 +22,6 @@ import static com.teamabnormals.endergetic.api.util.ModelUtil.setScale;
  * Created using Tabula 7.0.0
  */
 public class LargeEetleEggModel implements IEetleEggModel {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "large_eetle_egg"), "main");
 	public ModelPart smallEgg;
 	public ModelPart Egg;
 	public ModelPart GiantEgg;

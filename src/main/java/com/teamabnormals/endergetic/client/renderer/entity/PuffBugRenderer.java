@@ -5,6 +5,7 @@ import com.teamabnormals.endergetic.client.model.PuffBugModel;
 import com.teamabnormals.endergetic.client.renderer.entity.layers.LayerRendererPuffBugGlow;
 import com.teamabnormals.endergetic.common.entity.puffbug.PuffBug;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -16,7 +17,7 @@ public class PuffBugRenderer extends MobRenderer<PuffBug, EntityModel<PuffBug>> 
 	private static final ResourceLocation INFLATED = new ResourceLocation(EndergeticExpansion.MOD_ID, "textures/entity/puffbug/puffbug_inflated.png");
 
 	public PuffBugRenderer(EntityRendererProvider.Context context) {
-		super(context, new PuffBugModel<>(context.bakeLayer(PuffBugModel.LOCATION)), 0.3F);
+		super(context, new PuffBugModel<>(context.bakeLayer(EEModelLayers.PUFF_BUG)), 0.3F);
 		this.addLayer(new LayerRendererPuffBugGlow<>(this));
 	}
 

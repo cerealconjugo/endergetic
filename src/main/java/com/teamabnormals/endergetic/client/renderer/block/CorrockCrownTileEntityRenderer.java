@@ -9,6 +9,7 @@ import com.teamabnormals.endergetic.client.model.corrock.CorrockCrownWallModel;
 import com.teamabnormals.endergetic.common.block.CorrockCrownStandingBlock;
 import com.teamabnormals.endergetic.common.block.entity.CorrockCrownTileEntity;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import com.teamabnormals.endergetic.core.registry.EEBlocks;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -29,8 +30,8 @@ public class CorrockCrownTileEntityRenderer implements BlockEntityRenderer<Corro
 	};
 
 	public CorrockCrownTileEntityRenderer(BlockEntityRendererProvider.Context context) {
-		this.standingModel = new CorrockCrownStandingModel(context.bakeLayer(CorrockCrownStandingModel.LOCATION));
-		this.wallModel = new CorrockCrownWallModel(context.bakeLayer(CorrockCrownWallModel.LOCATION));
+		this.standingModel = new CorrockCrownStandingModel(context.bakeLayer(EEModelLayers.CORROCK_CROWN_STANDING));
+		this.wallModel = new CorrockCrownWallModel(context.bakeLayer(EEModelLayers.CORROCK_CROWN_WALL));
 	}
 
 	@Override

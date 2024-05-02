@@ -29,7 +29,6 @@ import net.minecraft.world.level.LightLayer;
  * Created using Tabula 7.0.0
  */
 public class PuffBugModel<E extends PuffBug> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "puff_bug"), "main");
 	public EndimatorModelPart Body;
 	public EndimatorModelPart Stinger;
 	public EndimatorModelPart Neck;

@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
  * Created using Tabula 7.0.0
  */
 public class BoofBlockModel<T extends BoofBlockEntity> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "boof_block"), "main");
 	public ModelPart base;
 
 	public BoofBlockModel(ModelPart root) {

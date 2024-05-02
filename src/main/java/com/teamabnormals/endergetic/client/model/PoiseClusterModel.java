@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
  * Created using Tabula 7.0.0
  */
 public class PoiseClusterModel<T extends PoiseClusterEntity> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "poise_cluster"), "main");
 	public ModelPart cube;
 
 	public PoiseClusterModel(ModelPart root) {

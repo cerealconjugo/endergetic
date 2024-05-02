@@ -4,15 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.endergetic.common.entity.purpoid.Purpoid;
-import com.teamabnormals.endergetic.core.EndergeticExpansion;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 
 public class PurpModel extends PurpoidModel {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "purp"), "main");
 
 	public PurpModel(ModelPart root) {
 		super(root);

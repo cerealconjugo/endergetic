@@ -18,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -89,7 +90,7 @@ public abstract class AbstractBolloom extends Entity {
 		}
 
 		if (isOnServerSide) {
-			if (this.getY() >= 254 && this.isUntied()) {
+			if (this.getY() > this.level().getMaxBuildHeight() && this.isUntied()) {
 				this.onBroken(true);
 				this.discard();
 			}
@@ -222,8 +223,12 @@ public abstract class AbstractBolloom extends Entity {
 
 	protected void doParticles() {
 		if (this.level() instanceof ServerLevel serverLevel) {
-			serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, EEBlocks.BOLLOOM_PARTICLE.get().defaultBlockState()), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05D);
+			serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockForParticle().defaultBlockState()), this.getX(), this.getY() + (double) this.getBbHeight() / 1.5D, this.getZ(), 10, this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05D);
 		}
+	}
+
+	public Block getBlockForParticle() {
+		return EEBlocks.BOOF_BLOCK.get();
 	}
 
 	@Override

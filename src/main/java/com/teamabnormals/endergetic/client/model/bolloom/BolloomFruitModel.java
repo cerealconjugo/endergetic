@@ -21,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
  * Created using Tabula 7.0.0
  */
 public class BolloomFruitModel<T extends BolloomFruit> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "bolloom_fruit"), "main");
 	public ModelPart vine_x;
 	public ModelPart fruit;
 	public ModelPart vine_z;

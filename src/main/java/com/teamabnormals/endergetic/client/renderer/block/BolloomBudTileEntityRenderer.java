@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.endergetic.client.model.bolloom.BolloomBudModel;
 import com.teamabnormals.endergetic.common.block.entity.BolloomBudTileEntity;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,7 +17,7 @@ public class BolloomBudTileEntityRenderer implements BlockEntityRenderer<Bolloom
 	private BolloomBudModel budModel;
 
 	public BolloomBudTileEntityRenderer(BlockEntityRendererProvider.Context context) {
-		this.budModel = new BolloomBudModel(context.bakeLayer(BolloomBudModel.LOCATION));
+		this.budModel = new BolloomBudModel(context.bakeLayer(EEModelLayers.BOLLOOM_BUD));
 	}
 
 	@Override

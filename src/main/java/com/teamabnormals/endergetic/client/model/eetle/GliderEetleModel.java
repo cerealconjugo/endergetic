@@ -23,7 +23,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class GliderEetleModel extends EndimatorEntityModel<GliderEetle> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "glider_eetle"), "main");
 	private static final float WING_SHOW_THRESHOLD = (float) Math.toRadians(9.0F);
 	public ModelPart body;
 	public ModelPart rightElytron;

@@ -24,8 +24,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class BoofloModel<E extends Booflo> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "booflo"), "main");
-
 	public ModelPart Head;
 	public ModelPart Jaw;
 	public ModelPart KneeLeft;

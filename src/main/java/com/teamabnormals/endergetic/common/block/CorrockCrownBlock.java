@@ -46,11 +46,11 @@ public abstract class CorrockCrownBlock extends BaseEntityBlock implements Simpl
 	}
 
 	public enum DimensionalType {
-		OVERWORLD(EEParticleTypes.OVERWORLD_CROWN),
-		NETHER(EEParticleTypes.NETHER_CROWN),
-		END(EEParticleTypes.END_CROWN);
+		OVERWORLD(() -> EEParticleTypes.OVERWORLD_CROWN.get()),
+		NETHER(() -> EEParticleTypes.NETHER_CROWN.get()),
+		END(() -> EEParticleTypes.END_CROWN.get());
 
-		protected final Supplier<ParticleType<CorrockCrownParticleData>> particle;
+		final Supplier<ParticleType<CorrockCrownParticleData>> particle;
 
 		DimensionalType(Supplier<ParticleType<CorrockCrownParticleData>> particle) {
 			this.particle = particle;

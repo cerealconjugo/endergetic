@@ -23,7 +23,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class AdolescentBoofloModel<E extends BoofloAdolescent> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "adolescent_booflo"), "main");
 	public ModelPart Head;
 	public ModelPart KneeLeft;
 	public ModelPart KneeRight;

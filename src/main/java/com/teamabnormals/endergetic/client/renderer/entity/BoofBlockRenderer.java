@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.endergetic.client.model.BoofBlockModel;
 import com.teamabnormals.endergetic.common.entity.BoofBlockEntity;
 import com.teamabnormals.endergetic.core.EndergeticExpansion;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -16,7 +17,7 @@ public class BoofBlockRenderer extends EntityRenderer<BoofBlockEntity> {
 
 	public BoofBlockRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		this.model = new BoofBlockModel<>(context.bakeLayer(BoofBlockModel.LOCATION));
+		this.model = new BoofBlockModel<>(context.bakeLayer(EEModelLayers.BOOF_BLOCK));
 		this.shadowRadius = 0.0F;
 	}
 

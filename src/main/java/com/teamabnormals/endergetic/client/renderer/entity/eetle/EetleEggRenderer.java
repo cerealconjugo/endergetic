@@ -8,6 +8,7 @@ import com.teamabnormals.endergetic.client.model.eetle.eggs.MediumEetleEggModel;
 import com.teamabnormals.endergetic.client.model.eetle.eggs.SmallEetleEggModel;
 import com.teamabnormals.endergetic.client.renderer.block.EetleEggTileEntityRenderer;
 import com.teamabnormals.endergetic.common.entity.eetle.EetleEgg;
+import com.teamabnormals.endergetic.core.other.EEModelLayers;
 import com.teamabnormals.endergetic.core.other.EERenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -22,9 +23,9 @@ public class EetleEggRenderer extends EntityRenderer<EetleEgg> {
 	public EetleEggRenderer(EntityRendererProvider.Context context) {
 		super(context);
 		this.eggModels = new IEetleEggModel[]{
-				new SmallEetleEggModel(context.bakeLayer(SmallEetleEggModel.LOCATION)),
-				new MediumEetleEggModel(context.bakeLayer(MediumEetleEggModel.LOCATION)),
-				new LargeEetleEggModel(context.bakeLayer(LargeEetleEggModel.LOCATION))
+				new SmallEetleEggModel(context.bakeLayer(EEModelLayers.SMALL_EETLE_EGG)),
+				new MediumEetleEggModel(context.bakeLayer(EEModelLayers.MEDIUM_EETLE_EGG)),
+				new LargeEetleEggModel(context.bakeLayer(EEModelLayers.LARGE_EETLE_EGG))
 		};
 	}
 

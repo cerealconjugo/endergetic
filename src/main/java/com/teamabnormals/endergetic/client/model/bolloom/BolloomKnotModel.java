@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
  * Created using Tabula 7.0.0
  */
 public class BolloomKnotModel<T extends BolloomKnot> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(EndergeticExpansion.MOD_ID, "bolloom_knot"), "main");
 	public ModelPart knot;
 
 	public BolloomKnotModel(ModelPart root) {

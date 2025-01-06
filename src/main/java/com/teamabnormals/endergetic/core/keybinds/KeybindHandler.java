@@ -56,8 +56,7 @@ public final class KeybindHandler {
 				}
 			}
 		}
-		if (player.getVehicle() instanceof Booflo) {
-			Booflo booflo = (Booflo) player.getVehicle();
+		if (player.getVehicle() instanceof Booflo booflo) {
 			if (!booflo.onGround()) {
 				if (BOOFLO_SLAM.isDown()) {
 					if (booflo.isBoofed() && booflo.getBoostPower() <= 0 && booflo.isNoEndimationPlaying()) {

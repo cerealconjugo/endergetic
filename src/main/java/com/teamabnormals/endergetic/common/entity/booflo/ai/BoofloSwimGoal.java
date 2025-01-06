@@ -1,5 +1,6 @@
 package com.teamabnormals.endergetic.common.entity.booflo.ai;
 
+import com.teamabnormals.endergetic.common.entity.booflo.Booflo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
@@ -27,6 +28,7 @@ public class BoofloSwimGoal extends RandomStrollGoal {
 
 	@Override
 	public boolean canUse() {
+		if (!((Booflo) this.mob).isBoofed()) return false;
 		if (this.mob.isVehicle()) {
 			return false;
 		} else {

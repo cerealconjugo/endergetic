@@ -184,11 +184,12 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		if (!this.level().isClientSide) {
-			if (this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_CHARGE) && this.getAnimationTick() >= 15) {
-				this.push(0.0F, -0.225F, 0.0F);
-			}
+		if (this.isControlledByLocalInstance() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_CHARGE) && this.getAnimationTick() >= 15) {
+			this.setDeltaMovement(this.getDeltaMovement().multiply(0.9D, 1.0D, 0.9D));
+			this.push(0.0F, -0.225F, 0.0F);
+		}
 
+		if (!this.level().isClientSide) {
 			this.setOnGround(!this.level().noCollision(DetectionHelper.checkOnGround(this.getBoundingBox(), 0.07F)));
 
 			int power = this.getBoostPower();
@@ -303,7 +304,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 		if (this.isInWater()) {
 			if (!this.isBoofed()) {
 				this.setBoofed(true);
-			} else if (this.random.nextFloat() < 0.7F) {
+			} else if (this.random.nextFloat() < 0.7F && this.isControlledByLocalInstance()) {
 				this.push(0.0F, 0.05F, 0.0F);
 			}
 		}
@@ -511,41 +512,34 @@ public class Booflo extends PathfinderMob implements Endimatable {
 			}
 		}
 
-		//if (this.isControlledByLocalInstance()) {
+		if (this.isControlledByLocalInstance()) {
+			if (this.getControllingPassenger() instanceof Player && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_INFLATE) && this.getAnimationTick() == 2 && !this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_SLAM)) {
+				float boostPower = Mth.clamp(this.getBoostPower() * 0.01F, 0.35F, 1.82F);
+				float verticalStrength = Mth.clamp(boostPower, 0.35F, 1.5F);
 
-			if (this.isBoofed()) {
-				float gravity = this.getBoostPower() > 0 ? 0.01F : 0.035F;
+				float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * Mth.cos(this.getXRot() * ((float) Math.PI / 180F));
+				float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * Mth.cos(this.getXRot() * ((float) Math.PI / 180F));
+				Vec3 boostFowardForce = new Vec3(xMotion, 1.3F * verticalStrength, zMotion).normalize().scale(boostPower > 0.35 ? boostPower * 2.0F : boostPower);
 
-				if (this.isPathFinding()) {
-					this.getNavigation().stop();
-				}
+				this.setDeltaMovement(boostFowardForce.x(), 1.3F * verticalStrength, boostFowardForce.z());
+				this.hasImpulse = true;
+			}
 
-				if (this.getBoofloAttackTarget() != null) {
-					this.setBoofloAttackTargetId(0);
-				}
+			if (!this.isBoofed() && this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
+				Vec3 motion = this.getDeltaMovement();
+				MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
+				float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
 
-				this.move(MoverType.SELF, this.getDeltaMovement());
-				this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-				if (!this.isInWater()) {
-					this.setDeltaMovement(this.getDeltaMovement().subtract(0, gravity, 0));
-				}
-			} else {
-				if (this.onGround() && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_HOP) && this.getAnimationTick() == 10) {
-					Vec3 motion = this.getDeltaMovement();
-					MobEffectInstance jumpBoost = this.getEffect(MobEffects.JUMP);
-					float boostPower = jumpBoost == null ? 1.0F : (float) (jumpBoost.getAmplifier() + 1);
+				this.setDeltaMovement(motion.x, 0.55F * boostPower, motion.z);
+				this.hasImpulse = true;
 
-					this.setDeltaMovement(motion.x, 0.55F * boostPower, motion.z);
-					this.hasImpulse = true;
+				float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
+				float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
 
-					float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F));
-					float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F));
+				float multiplier = 0.5F + (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
-					float multiplier = 0.35F + (float) this.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-
-					this.setDeltaMovement(this.getDeltaMovement().add(xMotion * multiplier, 0.0F, zMotion * multiplier));
-				}
-			//}
+				this.setDeltaMovement(this.getDeltaMovement().add(xMotion * multiplier, 0.0F, zMotion * multiplier));
+			}
 		}
 	}
 
@@ -553,7 +547,14 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	public void travel(Vec3 vec3d) {
 		if (this.isAlive() && this.isVehicle()) {
 			if (this.isControlledByLocalInstance()) {
-				super.travel(new Vec3(0.0F, vec3d.y, 0.0F));
+				if (this.isBoofed()) {
+					this.moveRelative(0.0F, vec3d);
+					this.move(MoverType.SELF, this.getDeltaMovement());
+					this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+					if (!this.isMovingInAir()) this.setDeltaMovement(this.getDeltaMovement().subtract(0, 0.01D, 0));
+				} else {
+					super.travel(new Vec3(0.0F, vec3d.y, 0.0F));
+				}
 			} else {
 				this.setDeltaMovement(Vec3.ZERO);
 			}
@@ -562,9 +563,7 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				this.moveRelative(0.0F, vec3d);
 				this.move(MoverType.SELF, this.getDeltaMovement());
 				this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-				if (!this.isMovingInAir()) {
-					this.setDeltaMovement(this.getDeltaMovement().subtract(0, 0.01D, 0));
-				}
+				if (!this.isMovingInAir()) this.setDeltaMovement(this.getDeltaMovement().subtract(0, 0.01D, 0));
 			} else {
 				super.travel(vec3d);
 			}
@@ -836,21 +835,11 @@ public class Booflo extends PathfinderMob implements Endimatable {
 	public void boof(float internalStrength, float offensiveStrength, boolean slam) {
 		float verticalStrength = 1.0F;
 
-		if (this.isVehicle() && this.getControllingPassenger() instanceof Player && !this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_SLAM) && !this.isBoostLocked()) {
-			float boostPower = Mth.clamp(this.getBoostPower() * 0.01F, 0.35F, 1.82F);
-			offensiveStrength *= Mth.clamp(boostPower / 2, 0.5F, 1.85F);
-			verticalStrength *= Mth.clamp(boostPower, 0.35F, 1.5F);
-
-			float xMotion = -Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * Mth.cos(this.getXRot() * ((float) Math.PI / 180F));
-			float zMotion = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * Mth.cos(this.getXRot() * ((float) Math.PI / 180F));
-			Vec3 boostFowardForce = new Vec3(xMotion, 1.3F * verticalStrength, zMotion).normalize().scale(boostPower > 0.35 ? boostPower * 2.0F : boostPower);
-
-			this.setDeltaMovement(boostFowardForce.x(), 1.3F * verticalStrength, boostFowardForce.z());
-		} else {
+		if (this.isControlledByLocalInstance() && !(this.getControllingPassenger() instanceof Player && this.isEndimationPlaying(EEPlayableEndimations.BOOFLO_INFLATE) && this.getBoostPower() > 0)) {
 			this.push(-Mth.sin((float) (this.getYRot() * Math.PI / 180.0F)) * ((4 * internalStrength) * (this.random.nextFloat() + 0.1F)) * 0.1F, 1.3F * verticalStrength, Mth.cos((float) (this.getYRot() * Math.PI / 180.0F)) * ((4 * internalStrength) * (this.random.nextFloat() + 0.1F)) * 0.1F);
 		}
 
-		if (slam) {
+		if (slam && this.level().isClientSide) {
 			for (int i = 0; i < 12; i++) {
 				double offsetX = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
 				double offsetZ = MathUtil.makeNegativeRandomly(this.random.nextFloat() * 0.25F, this.random);
@@ -859,16 +848,15 @@ public class Booflo extends PathfinderMob implements Endimatable {
 				double y = this.getY() + 0.5D + (this.random.nextFloat() * 0.05F);
 				double z = this.getZ() + 0.5D + offsetZ;
 
-				if (this.level().isClientSide) {
-					this.level().addParticle(EEParticleTypes.POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F);
-				}
+				this.level().addParticle(EEParticleTypes.POISE_BUBBLE.get(), x, y, z, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F, (this.random.nextFloat() * 0.15F) + 0.1F, MathUtil.makeNegativeRandomly((this.random.nextFloat() * 0.3F), this.random) + 0.025F);
 			}
 		}
 
-		for (Entity entity : this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(3.5F * Math.max(offensiveStrength / 2.0F, 1.0F)), entity -> entity != this && (entity instanceof ItemEntity || entity instanceof LivingEntity) && !(entity instanceof Player && ((Player) entity).isCreative() && ((Player) entity).getAbilities().flying))) {
+		var rider = this.getControllingPassenger();
+		for (Entity entity : this.level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(3.5F * Math.max(offensiveStrength / 2.0F, 1.0F)), entity -> entity != this && entity != rider && (entity instanceof ItemEntity || entity instanceof LivingEntity) && !(entity instanceof Player && ((Player) entity).isCreative() && ((Player) entity).getAbilities().flying))) {
 			float resistance = this.isResistantToBoof(entity) ? 0.15F : 1.0F;
 			float amount = (0.2F * offensiveStrength) * resistance;
-			if (offensiveStrength > 2.0F && resistance > 0.15F && entity != this.getControllingPassenger()) {
+			if (offensiveStrength > 2.0F && resistance > 0.15F) {
 				entity.hurt(this.level().damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getBaseValue());
 				entity.hurtMarked = false;
 			}

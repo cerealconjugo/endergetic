@@ -41,7 +41,7 @@ public final class C2SInflateBoofloVestMessage {
 				Player player = context.getSender();
 				if (player != null && !player.onGround() && !player.isSpectator()) {
 					ItemStack stack = player.getInventory().armor.get(2);
-					if (stack.getItem() == EEItems.BOOFLO_VEST.get() && BoofloVestItem.canBoof(stack, player)) {
+					if (stack.is(EEItems.BOOFLO_VEST.get()) && BoofloVestItem.canBoof(stack, player)) {
 						CompoundTag tag = stack.getOrCreateTag();
 						tag.putBoolean(BoofloVestItem.BOOFED_TAG, true);
 						tag.putInt(BoofloVestItem.TICKS_BOOFED_TAG, 0);
